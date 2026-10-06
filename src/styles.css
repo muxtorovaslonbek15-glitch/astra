@@ -44,3 +44,7 @@
 @keyframes hero-zoom{from{transform:scale(1)}to{transform:scale(1.08)}}
 .subject-image img{transition:transform .5s ease}
 .subject-card:hover .subject-image img{transform:scale(1.07)}
+
+/* Scroll ishlaydi, lekin polosa ko'rinmaydi */
+html,body{scrollbar-width:none;-ms-overflow-style:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}
