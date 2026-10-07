@@ -10,7 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as FanlarRouteImport } from './routes/fanlar'
+import { Route as ApiNotifyApprovedRouteImport } from './routes/api/notify-approved'
+import { Route as ApiTelegramAuthRouteImport } from './routes/api/telegram-auth'
 import { Route as FanSlugRouteImport } from './routes/fan.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +21,24 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FanlarRoute = FanlarRouteImport.update({
   id: '/fanlar',
   path: '/fanlar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNotifyApprovedRoute = ApiNotifyApprovedRouteImport.update({
+  id: '/api/notify-approved',
+  path: '/api/notify-approved',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiTelegramAuthRoute = ApiTelegramAuthRouteImport.update({
+  id: '/api/telegram-auth',
+  path: '/api/telegram-auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FanSlugRoute = FanSlugRouteImport.update({
@@ -31,31 +49,62 @@ const FanSlugRoute = FanSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/fanlar': typeof FanlarRoute
+  '/api/notify-approved': typeof ApiNotifyApprovedRoute
+  '/api/telegram-auth': typeof ApiTelegramAuthRoute
   '/fan/$slug': typeof FanSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/fanlar': typeof FanlarRoute
+  '/api/notify-approved': typeof ApiNotifyApprovedRoute
+  '/api/telegram-auth': typeof ApiTelegramAuthRoute
   '/fan/$slug': typeof FanSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/fanlar': typeof FanlarRoute
+  '/api/notify-approved': typeof ApiNotifyApprovedRoute
+  '/api/telegram-auth': typeof ApiTelegramAuthRoute
   '/fan/$slug': typeof FanSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fanlar' | '/fan/$slug'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/fanlar'
+    | '/api/notify-approved'
+    | '/api/telegram-auth'
+    | '/fan/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fanlar' | '/fan/$slug'
-  id: '__root__' | '/' | '/fanlar' | '/fan/$slug'
+  to:
+    | '/'
+    | '/admin'
+    | '/fanlar'
+    | '/api/notify-approved'
+    | '/api/telegram-auth'
+    | '/fan/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/fanlar'
+    | '/api/notify-approved'
+    | '/api/telegram-auth'
+    | '/fan/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   FanlarRoute: typeof FanlarRoute
+  ApiNotifyApprovedRoute: typeof ApiNotifyApprovedRoute
+  ApiTelegramAuthRoute: typeof ApiTelegramAuthRoute
   FanSlugRoute: typeof FanSlugRoute
 }
 
@@ -68,11 +117,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fanlar': {
       id: '/fanlar'
       path: '/fanlar'
       fullPath: '/fanlar'
       preLoaderRoute: typeof FanlarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/notify-approved': {
+      id: '/api/notify-approved'
+      path: '/api/notify-approved'
+      fullPath: '/api/notify-approved'
+      preLoaderRoute: typeof ApiNotifyApprovedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/telegram-auth': {
+      id: '/api/telegram-auth'
+      path: '/api/telegram-auth'
+      fullPath: '/api/telegram-auth'
+      preLoaderRoute: typeof ApiTelegramAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fan/$slug': {
@@ -87,7 +157,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   FanlarRoute: FanlarRoute,
+  ApiNotifyApprovedRoute: ApiNotifyApprovedRoute,
+  ApiTelegramAuthRoute: ApiTelegramAuthRoute,
   FanSlugRoute: FanSlugRoute,
 }
 export const routeTree = rootRouteImport
